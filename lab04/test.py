@@ -1,0 +1,54 @@
+import requests
+import json
+
+URL = "https://mids.usna.edu/ITSD/mids/drgwq010$mids.actionquery"
+cookie = "WSG$DRGWQ010$URL0=/ITSD/mids/drgwq010$.startup; WSG$DRGWQ010$CAP0=Schedules_-_Query_Midshipmen; f5_cspm=1234; BIGipServermids_prod=!QfqtcOONzcqbQXJGgKQlRzHXMv4uPcpO/EViDMRzFLx5tXYayw3AjMFEFlSJ3Pc1TYH0zF2GonXYbAk=; f5avraaaaaaaaaaaaaaaa_session_=MDICCCICACEOOLACAODMLOJKCBHGGELFLJBNMFJDMMPLHENOHIHBOGCEBFAGCOMAHAKDNMINBIBEPCEKDAMANHFPEPKJKOIPEPPBEJEAFDMMHJACKLKJCNNEDOKFMHPC; OAMAuthnCookie_mids.usna.edu:443=9l3T59%2FLmwt6OGHYBCvoQrqEQ2PhDv0zEWvXyyaTRE1tuRzVqVX%2Bt3JZm0toarNjDJ6bIQeSPeejhdOyVuwM1Otlf9NZgoAg7qpD1uj3UmbxIIPcWkP7CBuRSz4FzVVnkTJ41M4UpjnaScJ38c7zShEgrGn9yPwmL5pUkjwKOt1HNNlRFd0ahlk%2Bw%2FQM1Kr%2Fu6d5NXUUA3xHtACJ8h8d8HFKBKXA1YP5Sl%2F255WQSiqXolRtAaBTz0z%2FeKV962ofiXsjQHDykyTF95dDP1scyATL6yLROVrXqaHOX1FJIzm%2B%2BgwJHaUvaCZPh5%2BDyfMIb9hpiFemiOhYGKyDaPmcLbSH%2BKSRXwGnrh%2BkABmapClgyHfcKKQLEqY%2FiqJj0UF3Z4R50ziG14aECo7H0XS3b5%2Fbhl5ankJ6pjR4yM9CgHwNZdln9r%2Fo8FPPLH8Jp%2F%2FhnDl0uIpatYFiGIMYZIRkjEiWoK9EVhpmLBwKXx%2Bov0He%2B2WAN4zmMbJ3bEAlY2pEFe1eD0wi3rjfWUAhRm53wQGlvw5Qv3H6PgIZ2D%2B3HXaBWZfS6BPrisf2G0G7RnYXy442mgTk%2F9Xf2%2FoNmsCgJQ%3D%3D; f5avr1895959366aaaaaaaaaaaaaaaa_cspm_=ABCCPMALCNHKMADHMIBDABEBGLHGKFOPFDJICPHCPCOKNFLIKAHJJKJNPHJJCHAPCNECJIBJBIDJHEAMCBDADGELAMCIMAIHAGBPEAKEAPBOFMFDHGJGLDOCBCLDKLPD"
+headers = {
+        "Host": "mids.usna.edu",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language":  "en-US,en;q=0.5",
+        "Accept-Encoding": "gzip, deflate, br, zstd",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Origin": "https://mids.usna.edu",
+        "Connection": "keep-alive",
+        "Referer": "https://mids.usna.edu/ITSD/mids/drgwq010$.startup",
+        "Cookie": cookie,
+        "Upgrade-Insecure-Requests": "1",
+        "Sec-Fetch-Dest": "document",
+        "Sec-Fetch-Mode": "navigate",
+        "Sec-Fetch-Site": "same-origin",
+        "Sec-Fetch-User": "?1",
+        "Priority": "u=0, i",
+        }
+
+hardcoded_req_data = {
+        "P_ALPHA":"270036",
+        "P_LAST_NAME":"Agarwal",
+        "P_MICO_CO_NBR":"34",
+        "P_SECOF_COOF_SEBLDA_AC_YR":"2026",
+        "P_SECOF_COOF_SEBLDA_SEM":"FALL",
+        "P_SECOF_COOF_SEBLDA_BLK_NBR":"1",
+        "P_MAJOR_CODE":"SCS",
+        "P_NOMI_FORMATTED_NAME":"LT Brett Michael Gentile",
+        "Z_ACTION":"QUERY",
+        "Z_CHK":"0"}
+        
+alpha = input("Enter your alpha: ")
+
+input_req_data = {
+    "P_ALPHA":alpha,
+    "P_LAST_NAME":None,
+    "P_MICO_CO_NBR":None,
+    "P_SECOF_COOF_SEBLDA_AC_YR":"2026",
+    "P_SECOF_COOF_SEBLDA_SEM":"FALL",
+    "P_SECOF_COOF_SEBLDA_BLK_NBR":"1",
+    "P_MAJOR_CODE":None,
+    "P_NOMI_FORMATTED_NAME":None,
+    "Z_ACTION":"QUERY",
+    "Z_CHK":"0"}
+
+
+response = requests.post(URL, headers=headers, data=input_req_data)
+
+print("POST request status:", response.status_code)
+print(response.text)
